@@ -1,5 +1,4 @@
 package com.example.todo_list.services;
-
 import com.example.todo_list.dto.Id;
 import com.example.todo_list.dto.ObjectRequest;
 import com.example.todo_list.dto.ObjectRequest_Update;
@@ -35,23 +34,34 @@ public class TodoService {
 
     }
 
-    public TodoModel updateTodo(Long id, ObjectRequest_Update update){
-        Optional<TodoModel> optionalTodoModel = todoRepositories.findById(id);
-        if (optionalTodoModel.isPresent()) {
-            TodoModel existingTodo = optionalTodoModel.get();
+    public TodoModel updateTodo(Long id, ObjectRequest_Update update) {
 
-            // Mise à jour des champs
-            existingTodo.setTitle(update.getTitle());
-            existingTodo.setDescription(update.getDescription());
-            existingTodo.setActive(update.getActive());
-            existingTodo.setPrioritie(update.getPrioritie());
+        TodoModel existingTodo = todoRepositories.findById(id)
+                .orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
 
-            // Sauvegarde et retour de l'objet mis à jour
-            return todoRepositories.save(existingTodo);
-        } else {
-            throw new RuntimeException("Todo not found with id: " + id);
+        // Vérification de l'autorisation (inutile car `id` vient de la recherche)
+        if (!existingTodo.getId().equals(id)) {
+            throw new RuntimeException("You don't have the authorization");
         }
+
+        // Mise à jour des champs uniquement s'ils ne sont pas null
+        if (update.getTitle() != null) {
+            existingTodo.setTitle(update.getTitle());
+        }
+        if (update.getDescription() != null) {
+            existingTodo.setDescription(update.getDescription());
+        }
+        if (update.getActive() != null) {
+            existingTodo.setActive(update.getActive());
+        }
+        if (update.getPrioritie() != null) {
+            existingTodo.setPrioritie(update.getPrioritie());
+        }
+
+        // Sauvegarde et retour de l'objet mis à jour
+        return todoRepositories.save(existingTodo);
     }
+
 
     public void deleteTodo(Long ident, Id id) {
         Optional<TodoModel> optionalTodoModel = todoRepositories.findById(ident);
@@ -63,9 +73,9 @@ public class TodoService {
         TodoModel existingTodo = optionalTodoModel.get();
 
         // Vérification de l'autorisation
-        if (!existingTodo.getId().equals(id.getId())) {
-            throw new RuntimeException("You don't have the authorization");
-        }
+        //if (!existingTodo.getId().equals(id)) {
+        //    throw new RuntimeException("You don't have the authorization");
+        //}
 
         // Suppression de l'élément
         todoRepositories.deleteById(ident);

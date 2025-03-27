@@ -1,6 +1,7 @@
 package com.example.todo_list.dto;
 
 
+import com.example.todo_list.Dataenum.DataEnum;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ public class ObjectRequest_Update {
     private Long id;
     private Boolean active;
     private String description;
-    private String prioritie;
+    private DataEnum prioritie;
     private String title;
 
     public Long getId() {
@@ -27,7 +28,7 @@ public class ObjectRequest_Update {
         return description;
     }
 
-    public String getPrioritie() {
+    public DataEnum getPrioritie() {
         return prioritie;
     }
 

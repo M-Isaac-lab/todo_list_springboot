@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Id {
-    private Long Id;
 
-    public Long getId(){
-        return Id;
+    private Long id;
+
+    public Long getId (){
+        return id;
     }
-
-
 }

@@ -24,7 +24,7 @@ public class TodoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> GetTodo(@RequestParam Long id){
+    public ResponseEntity<?> GetTodo(@PathVariable Long id){
         return ResponseEntity.of(
                 Optional.ofNullable(
                         todoService.getTodo(id)
@@ -42,7 +42,7 @@ Optional.ofNullable(
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> UpdateTodo(@RequestParam Long id, @RequestBody ObjectRequest_Update update){
+    public ResponseEntity<?> UpdateTodo(@PathVariable Long id, @RequestBody ObjectRequest_Update update){
         return ResponseEntity.of(
                 Optional.ofNullable(
                   todoService.updateTodo(id, update)
@@ -51,7 +51,7 @@ Optional.ofNullable(
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> DeleteTodo(@RequestParam Long id, @RequestBody Id identif){
+    public ResponseEntity<?> DeleteTodo(@PathVariable Long id, @RequestBody Id identif){
            todoService.deleteTodo(id, identif);
         return ResponseEntity.ok("Todo deleted successfully");
 

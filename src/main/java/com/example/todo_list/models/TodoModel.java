@@ -1,5 +1,6 @@
 package com.example.todo_list.models;
 
+import com.example.todo_list.Dataenum.DataEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class TodoModel {
 
     private String description;
     private String title;
-    private String prioritie;
+    private DataEnum prioritie;
     private Boolean active;
 
 }

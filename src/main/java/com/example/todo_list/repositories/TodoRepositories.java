@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface TodoRepositories extends JpaRepository<TodoModel, Long> {
 
-    TodoModel findByDescription(String description);
-    List<TodoModel> findAllByDescription(String description);
+    //TodoModel findByDescription(String description);
+    //List<TodoModel> findAllByDescription(String description);
 
-    TodoModel updateTodoModelBy(ObjectRequest_Update update);
+    //TodoModel updateTodoModelBy(ObjectRequest_Update update);
 
 }
